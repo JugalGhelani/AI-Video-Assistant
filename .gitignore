@@ -1,1 +1,8 @@
+venv/
 .env
+__pycache__/
+downloads/
+vector_db/
+*.wav
+*.mp3
+*.pt
