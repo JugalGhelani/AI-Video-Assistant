@@ -1,13 +1,25 @@
 import streamlit as st
+import os
 import time
 from dotenv import load_dotenv
+
+load_dotenv()
+
+for key in ("GROQ_API_KEY", "SARVAM_API_KEY"):
+    try:
+        value = st.secrets.get(key)
+        if value:
+            os.environ[key] = value
+    except Exception:
+        pass
+
+
 from utils.audio_processor import process_input
 from core.transcriber import transcribe_all
 from core.summarize  import summarize, generate_title
 from core.extractor import extract_action_items, extract_key_decisions, extract_questions
 from core.rag_engine import build_rag_chain, ask_question
 
-load_dotenv()
 
 # ─── Page Config ────────────────────────────────────────────────────────────────
 st.set_page_config(
